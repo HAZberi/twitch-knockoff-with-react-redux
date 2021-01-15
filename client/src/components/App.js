@@ -10,9 +10,9 @@ import Header from "./Header";
 function App() {
   return (
     <div className="ui container">
-      <Header />
       <BrowserRouter>
         <div>
+          <Header />
           <Route path="/" exact component={VideosList} />
           <Route path="/videos/show" exact component={VideosShow} />
           <Route path="/videos/new" exact component={VideosCreate} />
