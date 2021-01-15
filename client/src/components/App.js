@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { HashRouter, Route, Link } from "react-router-dom";
 
 
 
@@ -9,12 +9,12 @@ const PageTwo = () => <div>Page Two <Link to="/">Goto Home Page</Link></div>
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <HashRouter>
         <div>
           <Route path="/" exact component={PageOne}></Route>
           <Route path="/pagetwo" exact={true} component={PageTwo}></Route>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
