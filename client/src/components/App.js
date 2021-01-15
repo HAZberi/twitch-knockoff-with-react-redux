@@ -1,10 +1,10 @@
 import React from "react"
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 
 
-const PageOne = () => <div>Page One <a href="/pagetwo">Goto Page 2</a></div>
-const PageTwo = () => <div>Page Two <a href="/">Goto Home Page</a></div>
+const PageOne = () => <div>Page One <Link to="/pagetwo">Goto Page 2</Link></div>
+const PageTwo = () => <div>Page Two <Link to="/">Goto Home Page</Link></div>
 
 function App() {
   return (
