@@ -5,10 +5,12 @@ import VideosShow from "./videos/VideosShow";
 import VideosCreate from "./videos/VideosCreate";
 import VideosEdit from "./videos/VideosEdit";
 import VideosDestroy from "./videos/VideosDestroy";
+import Header from "./Header";
 
 function App() {
   return (
-    <div>
+    <div className="ui container">
+      <Header />
       <BrowserRouter>
         <div>
           <Route path="/" exact component={VideosList} />
