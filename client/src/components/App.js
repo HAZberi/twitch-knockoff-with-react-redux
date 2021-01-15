@@ -1,20 +1,14 @@
 import React from "react"
-import { MemoryRouter, Route, Link } from "react-router-dom";
-
-
-
-const PageOne = () => <div>Page One <Link to="/pagetwo">Goto Page 2</Link></div>
-const PageTwo = () => <div>Page Two <Link to="/">Goto Home Page</Link></div>
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <div>
-      <MemoryRouter>
+      <BrowserRouter>
         <div>
-          <Route path="/" exact component={PageOne}></Route>
-          <Route path="/pagetwo" exact={true} component={PageTwo}></Route>
+          
         </div>
-      </MemoryRouter>
+      </BrowserRouter>
     </div>
   );
 }
