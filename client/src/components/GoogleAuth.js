@@ -11,14 +11,15 @@ const GoogleAuth = ({ isSignedIn, signIn, signOut }) => {
   const onChangeAuth = useCallback(
     (isSignedIn) => {
       if (isSignedIn) {
-        signIn();
+        //This is how we get the google id of current user
+        signIn(window.gapi.auth2.getAuthInstance().currentUser.get().getId());
       } else {
         signOut();
       }
     },
     [signIn, signOut]
   );
-
+  
   useEffect(() => {
     window.gapi.load("auth2", () => {
       window.gapi.auth2
