@@ -80,7 +80,6 @@ const GoogleAuth = ({ isSignedIn, signIn, signOut }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return { isSignedIn: state.auth.isSignedIn };
 };
 
