@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions";
 
@@ -12,14 +12,20 @@ const GoogleAuth = ({ isSignedIn, signIn, signOut }) => {
     (isSignedIn) => {
       if (isSignedIn) {
         //This is how we get the google id of current user
-        signIn(window.gapi.auth2.getAuthInstance().currentUser.get().getId());
+        signIn(googleAuthObject.current.currentUser.get().getId());
       } else {
         signOut();
       }
     },
     [signIn, signOut]
   );
-  
+
+  //whenever we want a value to persist in our component we use the 'useRef' Hook
+  //In this case the googleAuth object is received aysnchronously and we want to use
+  //its value throughout the component in callbacks and helpers
+  //a very good use case for using useRef Hook
+  const googleAuthObject = useRef({});
+
   useEffect(() => {
     window.gapi.load("auth2", () => {
       window.gapi.auth2
@@ -29,10 +35,11 @@ const GoogleAuth = ({ isSignedIn, signIn, signOut }) => {
           scope: "email",
         })
         .then((authentication) => {
+          googleAuthObject.current = authentication;
           //the argument name in this function is The GoogleAuth Object
           //authentication = window.gapi.auth2.getAuthInstance();
-          onChangeAuth(authentication.isSignedIn.get());
-          authentication.isSignedIn.listen(onChangeAuth);
+          onChangeAuth(googleAuthObject.current.isSignedIn.get());
+          googleAuthObject.current.isSignedIn.listen(onChangeAuth);
         })
         .catch((err) => {
           console.error(err);
@@ -41,10 +48,10 @@ const GoogleAuth = ({ isSignedIn, signIn, signOut }) => {
   }, [onChangeAuth]);
 
   function onSignInClick() {
-    window.gapi.auth2.getAuthInstance().signIn();
+    googleAuthObject.current.signIn();
   }
   function onSignOutClick() {
-    window.gapi.auth2.getAuthInstance().signOut();
+    googleAuthObject.current.signOut();
   }
 
   const renderSignInStatus = () => {
