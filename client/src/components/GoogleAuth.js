@@ -1,7 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useCallback } from "react";
+import { connect } from "react-redux";
+import { signIn, signOut } from "../actions";
 
-const GoogleAuth = () => {
-  const [isSignedIn, setIsSignedIn] = useState(null);
+const GoogleAuth = ({ isSignedIn, signIn, signOut }) => {
+  //useCallback Hook is used to wrap the callback function to minimize re-renders
+  //Important concept or trick regarding useCallback Hook as follows
+  //Whenever a callback function is set as a dependency of useEffect
+  //Its a good idea to wrap the callback function with useCallback Hook
+  //Snippet from article: When the function object is a dependency to other hooks, e.g. useEffect(..., [callback])
+  const onChangeAuth = useCallback(
+    (isSignedIn) => {
+      if (isSignedIn) {
+        signIn();
+      } else {
+        signOut();
+      }
+    },
+    [signIn, signOut]
+  );
 
   useEffect(() => {
     window.gapi.load("auth2", () => {
@@ -14,25 +30,21 @@ const GoogleAuth = () => {
         .then((authentication) => {
           //the argument name in this function is The GoogleAuth Object
           //authentication = window.gapi.auth2.getAuthInstance();
-          setIsSignedIn(authentication.isSignedIn.get());
+          onChangeAuth(authentication.isSignedIn.get());
           authentication.isSignedIn.listen(onChangeAuth);
         })
         .catch((err) => {
           console.error(err);
         });
     });
-  }, []);
+  }, [onChangeAuth]);
 
-  const onChangeAuth = () => {
-    setIsSignedIn(window.gapi.auth2.getAuthInstance().isSignedIn.get());
-  };
-
-  const onSignInClick = () => {
+  function onSignInClick() {
     window.gapi.auth2.getAuthInstance().signIn();
-  };
-  const onSignOutClick = () => {
+  }
+  function onSignOutClick() {
     window.gapi.auth2.getAuthInstance().signOut();
-  };
+  }
 
   const renderSignInStatus = () => {
     if (isSignedIn === null) {
@@ -67,4 +79,9 @@ const GoogleAuth = () => {
   return <div>{renderSignInStatus()}</div>;
 };
 
-export default GoogleAuth;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return { isSignedIn: state.auth.isSignedIn };
+};
+
+export default connect(mapStateToProps, { signIn, signOut })(GoogleAuth);
