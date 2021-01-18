@@ -6,7 +6,10 @@ const VideosCreate = () => {
     const renderInput = (props) => {
         console.log("The <Field> Props", props);
         return (
-            <input {...props.input}/>
+            <div className="field">
+                <label>{props.label}</label>
+                <input {...props.input}/>
+            </div>
         );
     }
 
@@ -16,9 +19,9 @@ const VideosCreate = () => {
             {(props)=>{
                 console.log("The <Form> Props", props);
                 return (
-                    <form onSubmit={()=>console.log("Replace this function")}>
-                        <Field name="title" render={renderInput}/>
-                        <Field name="description" render={renderInput}/>
+                    <form className="ui form" onSubmit={()=>console.log("Replace this function")}>
+                        <Field name="title" render={renderInput} label="Channel Title"/>
+                        <Field name="description" render={renderInput} label="Description"/>
                     </form>                
                 )
             }}
