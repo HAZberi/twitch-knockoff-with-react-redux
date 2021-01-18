@@ -3,9 +3,10 @@ import { Form, Field } from "react-final-form";
 
 const VideosCreate = () => {
 
-    const renderInput = () => {
+    const renderInput = (props) => {
+        console.log("The <Field> Props", props);
         return (
-            <input />
+            <input {...props.input}/>
         );
     }
 
@@ -13,7 +14,7 @@ const VideosCreate = () => {
     return (
         <Form onSubmit={()=>console.log('form has been submitted')}>
             {(props)=>{
-                console.log(props);
+                console.log("The <Form> Props", props);
                 return (
                     <form onSubmit={()=>console.log("Replace this function")}>
                         <Field name="title" render={renderInput}/>
