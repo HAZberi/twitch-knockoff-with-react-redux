@@ -1,7 +1,11 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
+import { useDispatch } from "react-redux";
+import { createStream } from "../../actions";
 
 const VideosCreate = () => {
+
+    const dispatch = useDispatch();
 
     const renderInput = (props) => {
         //console.log("The <Field> Props", props);
@@ -26,7 +30,7 @@ const VideosCreate = () => {
     }
 
     const onSubmit = formValues => {
-        console.log(formValues);
+        dispatch(createStream(formValues));
     }
 
     const validate = formValues => {
