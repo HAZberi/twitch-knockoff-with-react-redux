@@ -8,7 +8,8 @@ const VideosCreate = () => {
         return (
             <div className="field">
                 <label>{props.label}</label>
-                <input {...props.input}/>
+                <input {...props.input} autoComplete="off"/>
+                <div>{props.meta.error}</div>
             </div>
         );
     }
@@ -17,8 +18,20 @@ const VideosCreate = () => {
         console.log(formValues);
     }
 
+    const validate = formValues => {
+        const errors = {};
+        if(!formValues.title){
+            //if user hasn't entered any title then this will run
+            errors.title = "You must enter a title";
+        }
+        if(!formValues.description){
+            errors.description = "You must enter some description"
+        }
+        return errors;
+    }
+
     return (
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} validate={validate}>
             {(props)=>{
                 console.log("The <Form> Props", props);
                 return (
