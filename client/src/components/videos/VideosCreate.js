@@ -13,15 +13,19 @@ const VideosCreate = () => {
         );
     }
 
+    const onSubmit = formValues => {
+        console.log(formValues);
+    }
 
     return (
-        <Form onSubmit={()=>console.log('form has been submitted')}>
+        <Form onSubmit={onSubmit}>
             {(props)=>{
                 console.log("The <Form> Props", props);
                 return (
-                    <form className="ui form" onSubmit={()=>console.log("Replace this function")}>
+                    <form className="ui form" onSubmit={props.handleSubmit}>
                         <Field name="title" render={renderInput} label="Channel Title"/>
                         <Field name="description" render={renderInput} label="Description"/>
+                        <button className="ui red large button">Submit</button>
                     </form>                
                 )
             }}
