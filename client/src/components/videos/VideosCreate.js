@@ -4,14 +4,25 @@ import { Form, Field } from "react-final-form";
 const VideosCreate = () => {
 
     const renderInput = (props) => {
-        console.log("The <Field> Props", props);
+        //console.log("The <Field> Props", props);
+        const classNames = `field ${props.meta.error && props.meta.touched ? "error" : ""}`
         return (
-            <div className="field">
+            <div className={classNames}>
                 <label>{props.label}</label>
                 <input {...props.input} autoComplete="off"/>
-                <div>{props.meta.error}</div>
+                {renderError(props.meta)}
             </div>
         );
+    }
+
+    const renderError = ({error, touched}) => {
+        if(touched && error){
+            return (
+                <div className="">
+                    <div className="ui pointing red basic label">{error}</div>
+                </div>
+            )
+        }
     }
 
     const onSubmit = formValues => {
@@ -33,9 +44,11 @@ const VideosCreate = () => {
     return (
         <Form onSubmit={onSubmit} validate={validate}>
             {(props)=>{
-                console.log("The <Form> Props", props);
+                //console.log("The <Form> Props", props);
                 return (
-                    <form className="ui form" onSubmit={props.handleSubmit}>
+                    //if error class is not added then errors will not display 
+                    //this would be sementic ui
+                    <form className="ui form error" onSubmit={props.handleSubmit}>
                         <Field name="title" render={renderInput} label="Channel Title"/>
                         <Field name="description" render={renderInput} label="Description"/>
                         <button className="ui red large button">Submit</button>
