@@ -9,6 +9,12 @@
       "title": "Another Stream",
       "description": "WoW now its working! Awesome",
       "id": 2
+    },
+    {
+      "title": "I just created this stream huhh",
+      "description": "This will be displayed in the state and will be the time to move forward",
+      "userId": "116153246862163023852",
+      "id": 3
     }
   ]
 }
