@@ -5,12 +5,24 @@ import { getStreams } from "../../actions";
 const VideosList = () => {
 
   const videosList = useSelector(state => Object.values(state.videos));
+  const currentUserId = useSelector(state => state.auth.userId);
   const dispatch = useDispatch();
 
+  const renderAdmin = (video) => {
+    if(video.userId === currentUserId){
+      return (
+        <div className="right floated content">
+          <button className="ui primary inverted button">Edit</button>
+          <button className="ui red inverted button">Delete</button>
+        </div>
+      )
+    }
+  }
   const renderList = (videosList) => {
     return videosList?.map((video) => {
       return(
         <div className="item" key={video.id}>
+          {renderAdmin(video)}
           <i className="large middle aligned icon camera" />
           <div className="content">
             {video.title}
