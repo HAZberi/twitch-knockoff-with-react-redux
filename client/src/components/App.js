@@ -1,16 +1,17 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import VideosList from "./videos/VideosList";
 import VideosShow from "./videos/VideosShow";
 import VideosCreate from "./videos/VideosCreate";
 import VideosEdit from "./videos/VideosEdit";
 import VideosDestroy from "./videos/VideosDestroy";
 import Header from "./Header";
+import history from "../history";
 
 function App() {
   return (
     <div className="ui container">
-      <BrowserRouter>
+      <Router history={history}>
         <div>
           <Header />
           <Route path="/" exact component={VideosList} />
@@ -19,7 +20,7 @@ function App() {
           <Route path="/videos/edit" exact component={VideosEdit} />
           <Route path="/videos/del" exact component={VideosDestroy} />
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
