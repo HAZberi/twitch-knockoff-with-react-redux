@@ -17,7 +17,7 @@ function App() {
           <Route path="/" exact component={VideosList} />
           <Route path="/videos/show" exact component={VideosShow} />
           <Route path="/videos/new" exact component={VideosCreate} />
-          <Route path="/videos/edit" exact component={VideosEdit} />
+          <Route path="/videos/edit/:id" exact component={VideosEdit} />
           <Route path="/videos/del" exact component={VideosDestroy} />
         </div>
       </Router>
