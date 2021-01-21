@@ -1,13 +1,9 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
-import { useDispatch } from "react-redux";
-import { createStream } from "../../actions";
 
-const VideosCreate = () => {
+const VideosForm = (props) => {
 
-    const dispatch = useDispatch();
-
-    const renderInput = (props) => {
+    const renderInput = () => {
         //console.log("The <Field> Props", props);
         const classNames = `field ${props.meta.error && props.meta.touched ? "error" : ""}`
         return (
@@ -30,7 +26,7 @@ const VideosCreate = () => {
     }
 
     const onSubmit = formValues => {
-        dispatch(createStream(formValues));
+        props.onSubmit(formValues);
     }
 
     const validate = formValues => {
@@ -63,4 +59,4 @@ const VideosCreate = () => {
     )
 }
 
-export default VideosCreate;
+export default VideosForm;
