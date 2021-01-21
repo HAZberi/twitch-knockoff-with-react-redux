@@ -14,8 +14,8 @@ const VideosList = () => {
     if (video.userId === currentUserId) {
       return (
         <div className="right floated content">
-          <Link to={`/videos/edit/${video.id}`} className="ui primary inverted button">Edit</Link>
-          <button className="ui red inverted button">Delete</button>
+          <Link to={`/videos/edit/${video.id}`} className="ui primary inverted icon button"><i className="edit icon"></i></Link>
+          <button className="ui red inverted icon button"><i className="trash icon"></i></button>
         </div>
       );
     }
