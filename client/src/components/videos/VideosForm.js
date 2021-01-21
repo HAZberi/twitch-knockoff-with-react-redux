@@ -3,14 +3,14 @@ import { Form, Field } from "react-final-form";
 
 const VideosForm = (props) => {
 
-    const renderInput = () => {
-        //console.log("The <Field> Props", props);
-        const classNames = `field ${props.meta.error && props.meta.touched ? "error" : ""}`
+    const renderInput = (formProps) => {
+        //console.log("The <Field> Props", formProps);
+        const classNames = `field ${formProps.meta.error && formProps.meta.touched ? "error" : ""}`
         return (
             <div className={classNames}>
-                <label>{props.label}</label>
-                <input {...props.input} autoComplete="off"/>
-                {renderError(props.meta)}
+                <label>{formProps.label}</label>
+                <input {...formProps.input} autoComplete="off"/>
+                {renderError(formProps.meta)}
             </div>
         );
     }
