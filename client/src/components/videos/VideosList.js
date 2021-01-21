@@ -20,7 +20,7 @@ const VideosList = () => {
       );
     }
   };
-  const renderList = (videosList) => {
+  const renderList = () => {
     return videosList?.map((video) => {
       return (
         <div className="item" key={video.id}>
@@ -53,7 +53,7 @@ const VideosList = () => {
 
   return (
     <>
-      <div className="ui celled list">{renderList(videosList)}</div>
+      <div className="ui celled list">{renderList()}</div>
       <div className="ui right floated content">
         {renderCreateButton(isSignedIn)}
       </div>
