@@ -14,20 +14,32 @@ const VideosList = () => {
     if (video.userId === currentUserId) {
       return (
         <div className="right floated content">
-          <Link to={`/videos/edit/${video.id}`} className="ui primary inverted icon button"><i className="edit icon"></i></Link>
-          <Link to={`/videos/del/${video.id}`}className="ui red inverted icon button"><i className="trash icon"></i></Link>
+          <Link
+            to={`/videos/edit/${video.id}`}
+            className="ui primary inverted icon button"
+          >
+            <i className="edit icon"></i>
+          </Link>
+          <Link
+            to={`/videos/del/${video.id}`}
+            className="ui red inverted icon button"
+          >
+            <i className="trash icon"></i>
+          </Link>
         </div>
       );
     }
   };
-  const renderList = () => {
+  const renderList = (videosList) => {
     return videosList?.map((video) => {
       return (
         <div className="item" key={video.id}>
           {renderAdmin(video)}
           <i className="large middle aligned icon camera" />
           <div className="content">
-            {video.title}
+            <Link to={`/streams/${video.id}`} className="header">
+              {video.title}
+            </Link>
             <div className="description">{video.description}</div>
           </div>
         </div>
@@ -53,7 +65,7 @@ const VideosList = () => {
 
   return (
     <>
-      <div className="ui celled list">{renderList()}</div>
+      <div className="ui celled list">{renderList(videosList)}</div>
       <div className="ui right floated content">
         {renderCreateButton(isSignedIn)}
       </div>
