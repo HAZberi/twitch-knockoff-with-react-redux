@@ -15,6 +15,10 @@ function App() {
         <div>
           <Header />
           <Route path="/" exact component={VideosList} />
+          {/* For show and create pages the path are appear to be same 
+          for React Router. :id === new in this case. This is the reason why we see 
+          this bug happening. In order to fix this we will import another dependency
+          in our project. */}
           <Route path="/videos/:id" exact component={VideosShow} />
           <Route path="/videos/new" exact component={VideosCreate} />
           {/* Route Urls has params and can be written like so "/videos/edit/:someid/:anythingelse/:seriously/:andsoOn" */}
