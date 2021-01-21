@@ -42,7 +42,7 @@ const VideosForm = (props) => {
     }
 
     return (
-        <Form onSubmit={onSubmit} validate={validate}>
+        <Form onSubmit={onSubmit} validate={validate} initialValues={props?.initialValues}>
             {(props)=>{
                 //console.log("The <Form> Props", props);
                 return (

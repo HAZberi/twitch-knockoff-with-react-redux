@@ -28,7 +28,7 @@ const VideosEdit = (props) => {
     return (
       <div>
         <h2>Edit Stream</h2>
-        <VideosForm onSubmit={onSubmit}/>
+        <VideosForm onSubmit={onSubmit} initialValues={videoToEdit}/>
       </div>
     )
   }
