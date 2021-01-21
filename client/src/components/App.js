@@ -19,7 +19,7 @@ function App() {
           <Route path="/videos/new" exact component={VideosCreate} />
           {/* Route Urls has params and can be written like so "/videos/edit/:someid/:anythingelse/:seriously/:andsoOn" */}
           <Route path="/videos/edit/:id" exact component={VideosEdit} />
-          <Route path="/videos/del" exact component={VideosDestroy} />
+          <Route path="/videos/del/:id" exact component={VideosDestroy} />
         </div>
       </Router>
     </div>

@@ -15,7 +15,7 @@ const VideosList = () => {
       return (
         <div className="right floated content">
           <Link to={`/videos/edit/${video.id}`} className="ui primary inverted icon button"><i className="edit icon"></i></Link>
-          <button className="ui red inverted icon button"><i className="trash icon"></i></button>
+          <Link to={`/videos/del/${video.id}`}className="ui red inverted icon button"><i className="trash icon"></i></Link>
         </div>
       );
     }
