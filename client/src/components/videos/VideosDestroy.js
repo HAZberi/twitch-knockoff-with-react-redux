@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "../Modal";
+import history from "../../history"
 
 const VideosDestroy = () => {
   const renderActions = (
@@ -15,6 +16,7 @@ const VideosDestroy = () => {
         title="Delete Stream"
         content="Are you sure you want to delete this stream?"
         actions={renderActions}
+        onDismiss={()=>history.push("/")}
       />
     </div>
   );
