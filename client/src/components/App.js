@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import VideosList from "./videos/VideosList";
 import VideosShow from "./videos/VideosShow";
 import VideosCreate from "./videos/VideosCreate";
@@ -14,16 +14,23 @@ function App() {
       <Router history={history}>
         <div>
           <Header />
-          <Route path="/" exact component={VideosList} />
-          {/* For show and create pages the path are appear to be same 
-          for React Router. :id === new in this case. This is the reason why we see 
-          this bug happening. In order to fix this we will import another dependency
-          in our project. */}
-          <Route path="/videos/:id" exact component={VideosShow} />
-          <Route path="/videos/new" exact component={VideosCreate} />
-          {/* Route Urls has params and can be written like so "/videos/edit/:someid/:anythingelse/:seriously/:andsoOn" */}
-          <Route path="/videos/edit/:id" exact component={VideosEdit} />
-          <Route path="/videos/del/:id" exact component={VideosDestroy} />
+          {/* With Switch - we are able to find the first route that matches the path 
+          and display only that specific route 
+          kind of like switch statement.
+          whenever it finds the correct and exact path. it just displays the content
+          associated with that path only. Handy solution */}
+          <Switch>
+            <Route path="/" exact component={VideosList} />
+            {/* For show and create pages the path are appear to be same 
+            for React Router. :id === new in this case. This is the reason why we see 
+            this bug happening. In order to fix this we will import another dependency
+            in our project. */}
+            <Route path="/videos/new" exact component={VideosCreate} />
+            <Route path="/videos/:id" exact component={VideosShow} />
+            {/* Route Urls has params and can be written like so "/videos/edit/:someid/:anythingelse/:seriously/:andsoOn" */}
+            <Route path="/videos/edit/:id" exact component={VideosEdit} />
+            <Route path="/videos/del/:id" exact component={VideosDestroy} />
+          </Switch>
         </div>
       </Router>
     </div>
