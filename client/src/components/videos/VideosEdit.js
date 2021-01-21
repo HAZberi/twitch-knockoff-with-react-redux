@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import _ from "lodash";
 import { getStream } from "../../actions";
 import VideosForm from "./VideosForm";
 //Route params are variables in our pathname like :id -- see <Router />
@@ -28,7 +29,14 @@ const VideosEdit = (props) => {
     return (
       <div>
         <h2>Edit Stream</h2>
-        <VideosForm onSubmit={onSubmit} initialValues={videoToEdit}/>
+        {/*At this point we are passing the entire video object, which work fine for the 
+        purposes of this application. But for complex applications its not how its done.
+        we should avoid updating/replacing properities that will not changes
+        once the inital stream has been created. So its always recommended to just make the 
+        changes to properties that we actually need to change, a good example would be use lodash
+        _.pick method which select specified properties of an object and return a new object
+        with selected properties like so*/}
+        <VideosForm onSubmit={onSubmit} initialValues={_.pick(videoToEdit, "title", "description")}/>
       </div>
     )
   }
