@@ -37,7 +37,7 @@ const VideosList = () => {
           {renderAdmin(video)}
           <i className="large middle aligned icon camera" />
           <div className="content">
-            <Link to={`/streams/${video.id}`} className="header">
+            <Link to={`/videos/${video.id}`} className="header">
               {video.title}
             </Link>
             <div className="description">{video.description}</div>
