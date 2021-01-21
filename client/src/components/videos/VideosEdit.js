@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import _ from "lodash";
-import { getStream } from "../../actions";
+import { getStream, editStream } from "../../actions";
 import VideosForm from "./VideosForm";
 //Route params are variables in our pathname like :id -- see <Router />
 //In order to access params with access default props.
@@ -45,7 +45,7 @@ const VideosEdit = (props) => {
   },[dispatch, videoId])
 
   const onSubmit = (formValues) => {
-    console.log(formValues);
+    dispatch(editStream(videoId, formValues));
   }
 
   //console.log(props, videoToEdit);
