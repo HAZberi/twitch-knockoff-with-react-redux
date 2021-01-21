@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getStream } from "../../actions"
+import { getStream } from "../../actions";
+import VideosForm from "./VideosForm";
 //Route params are variables in our pathname like :id -- see <Router />
 //In order to access params with access default props.
 //Since the component is linked with Router TAG we automatically recieve some
@@ -25,12 +26,19 @@ const VideosEdit = (props) => {
   const renderEditForm = (video) => {
     if(!video) return <div>Loading...</div>
     return (
-      <div>{video.title}</div>
+      <div>
+        <h2>Edit Stream</h2>
+        <VideosForm onSubmit={onSubmit}/>
+      </div>
     )
   }
   useEffect(()=>{
     dispatch(getStream(videoId))
   },[dispatch, videoId])
+
+  const onSubmit = (formValues) => {
+    console.log(formValues);
+  }
 
   //console.log(props, videoToEdit);
   return (
