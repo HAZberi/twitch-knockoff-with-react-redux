@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import flv from "flv.js";
 
 /* flv.js acts like axios or fetch it get the data from a remote server
@@ -30,10 +30,20 @@ const VideosShow = (props) => {
     );
   };
 
+  const buildPlayer = useCallback(() => {
+    const player = flv.createPlayer({
+      type: "flv",
+      url: `http://localhost:8000/live/${videoId}.flv`
+    });
+    player.attachMediaElement(videoPlayer.current);
+    player.load();
+  }, [videoId]);
+
 
   useEffect(() => {
     dispatch(getStream(videoId));
-  }, [dispatch, videoId]);
+    buildPlayer();
+  }, [dispatch, videoId, buildPlayer]);
   return <div>{render(videoToShow)}</div>;
 };
 
