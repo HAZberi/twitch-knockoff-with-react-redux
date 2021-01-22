@@ -30,7 +30,8 @@ const VideosShow = (props) => {
     );
   };
 
-  const buildPlayer = useCallback(() => {
+  const buildPlayer = useCallback((video) => {
+    if (!video) return
     const player = flv.createPlayer({
       type: "flv",
       url: `http://localhost:8000/live/${videoId}.flv`
@@ -41,9 +42,17 @@ const VideosShow = (props) => {
 
 
   useEffect(() => {
+    //console.log("I am fetching the stream");
     dispatch(getStream(videoId));
-    buildPlayer();
-  }, [dispatch, videoId, buildPlayer]);
+  }, [dispatch, videoId]);
+
+  useEffect(()=>{
+    //console.log("I am building the player");
+    buildPlayer(videoToShow);
+  }, [videoToShow, buildPlayer])
+
+
+
   return <div>{render(videoToShow)}</div>;
 };
 
